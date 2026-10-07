@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ✨</title>
+
+<style>
+
+/* =========================================================
+   WARNA UTAMA
+   ========================================================= */
+
+:root {
+    --cream: #fffaf5;
+    --pink: #e9b8bd;
+    --pink-dark: #c98791;
+    --gold: #c9a45c;
+    --text: #4a3d3d;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+body {
+
+    width: 100%;
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    font-family:
+        "Georgia",
+        "Times New Roman",
+        serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #fffdfb 0%,
+            #fff6f1 40%,
+            #f7e8e5 100%
+        );
+}
+
+
+/* =========================================================
+   CAHAYA LATAR
+   ========================================================= */
+
+.glow {
+
+    position: fixed;
+
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(233,184,189,0.18);
+
+    filter: blur(70px);
+
+    pointer-events: none;
+}
+
+.glow.one {
+    top: -150px;
+    left: -120px;
+}
+
+.glow.two {
+    right: -180px;
+    bottom: -150px;
+}
+
+
+/* =========================================================
+   HALAMAN
+   ========================================================= */
+
+.screen {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   KARTU UTAMA
+   ========================================================= */
+
+.card {
+
+    width: min(700px, 92vw);
+
+    min-height: 420px;
+
+    padding: 55px 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,0.60);
+
+    border:
+        1px solid
+        rgba(201,164,92,0.25);
+
+    box-shadow:
+        0 25px 80px
+        rgba(120,80,80,0.13);
+
+    backdrop-filter:
+        blur(18px);
+}
+
+
+/* =========================================================
+   PEMBUKA
+   ========================================================= */
+
+.small-title {
+
+    font-size: 13px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    color:
+        var(--gold);
+
+    margin-bottom: 22px;
+}
+
+
+h1 {
+
+    font-size:
+        clamp(35px, 7vw, 62px);
+
+    font-weight: normal;
+
+    color:
+        #604c4c;
+
+    margin-bottom: 18px;
+}
+
+
+.intro {
+
+    max-width: 500px;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color:
+        #806f6f;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================================================
+   TOMBOL MULAI
+   ========================================================= */
+
+.start-btn {
+
+    border: none;
+
+    padding:
+        13px 32px;
+
+    border-radius: 50px;
+
+    background:
+        #5d4a4b;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 10px 25px
+        rgba(70,50,50,0.2);
+}
+
+.start-btn:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        #463536;
+}
+
+
+/* =========================================================
+   AREA PERTANYAAN
+   ========================================================= */
+
+.question-card {
+
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+
+
+.question-number {
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    color:
+        var(--gold);
+
+    margin-bottom: 25px;
+}
+
+
+.question {
+
+    font-size:
+        clamp(25px, 5vw, 42px);
+
+    font-weight: normal;
+
+    text-align: center;
+
+    color:
+        #594849;
+
+    max-width: 650px;
+
+    padding:
+        0 25px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   AREA TOMBOL
+========================================================= */
+
+.answer-area {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 230px;
+
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   TOMBOL JAWABAN KECIL
+   ========================================================= */
+
+.answer-btn {
+
+    position: absolute;
+
+    padding:
+        10px 19px;
+
+    min-width: 80px;
+
+    border-radius: 30px;
+
+    border:
+        1px solid
+        rgba(201,164,92,0.5);
+
+    background:
+        rgba(255,255,255,0.82);
+
+    color:
+        #675354;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(80,50,50,0.08);
+
+    transition:
+        left 0.45s ease,
+        top 0.45s ease,
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+.answer-btn:hover {
+
+    transform:
+        scale(1.06);
+
+    background:
+        #fff;
+
+    border-color:
+        var(--gold);
+}
+
+
+/* =========================================================
+   POSISI AWAL
+   ========================================================= */
+
+#answer1 {
+
+    left:
+        30%;
+
+    top:
+        70px;
+}
+
+
+#answer2 {
+
+    left:
+        55%;
+
+    top:
+        70px;
+}
+
+
+/* =========================================================
+   HASIL AKHIR
+   ========================================================= */
+
+.final-card {
+
+    width: min(850px, 94vw);
+
+    height:
+        min(90vh, 850px);
+
+    overflow-y: auto;
+
+    padding:
+        40px 25px;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,0.72);
+
+    border:
+        1px solid
+        rgba(201,164,92,0.25);
+
+    box-shadow:
+        0 25px 80px
+        rgba(100,70,70,0.15);
+
+    backdrop-filter:
+        blur(20px);
+
+    text-align: center;
+}
+
+
+.final-title {
+
+    font-size:
+        clamp(30px, 6vw, 52px);
+
+    font-weight: normal;
+
+    color:
+        #604c4c;
+
+    margin-bottom: 8px;
+}
+
+
+.final-subtitle {
+
+    color:
+        #927e7e;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   FOTO
+   ========================================================= */
+
+.photo {
+
+    width:
+        min(430px, 90%);
+
+    max-height:
+        420px;
+
+    object-fit: cover;
+
+    border-radius: 25px;
+
+    display: block;
+
+    margin:
+        20px auto;
+
+    box-shadow:
+        0 15px 40px
+        rgba(70,50,50,0.15);
+}
+
+
+/* =========================================================
+   VIDEO
+   ========================================================= */
+
+.video {
+
+    width:
+        min(650px, 95%);
+
+    max-height:
+        400px;
+
+    border-radius:
+        22px;
+
+    margin:
+        20px auto;
+
+    display: block;
+
+    background:
+        #111;
+}
+
+
+/* =========================================================
+   ANIMASI KARTUN
+   ========================================================= */
+
+.cartoon-scene {
+
+    position: relative;
+
+    height: 330px;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffaf8,
+            #f9e8e7
+        );
+}
+
+
+/* lantai */
+
+.floor {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 55px;
+
+    background:
+        #ead3c8;
+
+    border-radius:
+        50% 50% 0 0;
+}
+
+
+/* =========================================================
+   KARAKTER
+   ========================================================= */
+
+.character {
+
+    position: absolute;
+
+    bottom: 45px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 120px;
+
+    height: 180px;
+
+    animation:
+        characterAppear
+        1.2s ease forwards;
+}
+
+
+/* kepala */
+
+.head {
+
+    position: absolute;
+
+    width: 78px;
+
+    height: 82px;
+
+    background:
+        #f4c7a9;
+
+    border-radius:
+        50%;
+
+    left: 21px;
+
+    top: 0;
+
+    z-index: 3;
+}
+
+
+/* rambut */
+
+.hair {
+
+    position: absolute;
+
+    width: 85px;
+
+    height: 55px;
+
+    background:
+        #493536;
+
+    border-radius:
+        50% 50% 35% 35%;
+
+    left: 17px;
+
+    top: -3px;
+
+    z-index: 4;
+}
+
+
+/* mata */
+
+.eye {
+
+    position: absolute;
+
+    width: 7px;
+
+    height: 7px;
+
+    background:
+        #493536;
+
+    border-radius: 50%;
+
+    top: 40px;
+
+    z-index: 5;
+}
+
+.eye.left {
+    left: 42px;
+}
+
+.eye.right {
+    left: 68px;
+}
+
+
+/* badan */
+
+.body {
+
+    position: absolute;
+
+    width: 78px;
+
+    height: 95px;
+
+    background:
+        #c98791;
+
+    border-radius:
+        35px 35px 15px 15px;
+
+    left: 21px;
+
+    top: 73px;
+
+    z-index: 2;
+}
+
+
+/* tangan */
+
+.arm {
+
+    position: absolute;
+
+    width: 18px;
+
+    height: 70px;
+
+    background:
+        #f4c7a9;
+
+    border-radius: 20px;
+
+    top: 85px;
+
+    z-index: 1;
+
+    transform-origin:
+        top center;
+}
+
+
+.arm.left {
+    left: 5px;
+    transform:
+        rotate(15deg);
+}
+
+
+.arm.right {
+    right: 5px;
+    transform:
+        rotate(-15deg);
+}
+
+
+/* =========================================================
+   BUNGA
+   ========================================================= */
+
+.flower {
+
+    position: absolute;
+
+    font-size: 65px;
+
+    left: 50%;
+
+    bottom: 115px;
+
+    transform:
+        translateX(-50%)
+        scale(0);
+
+    z-index: 10;
+
+    animation:
+        flowerGive
+        4s
+        1.5s
+        forwards;
+}
+
+
+/* =========================================================
+   CINCIN
+   ========================================================= */
+
+.ring {
+
+    position: absolute;
+
+    font-size: 42px;
+
+    left: 50%;
+
+    bottom: 125px;
+
+    transform:
+        translateX(-50%)
+        scale(0);
+
+    z-index: 11;
+
+    animation:
+        ringGive
+        5s
+        3s
+        forwards;
+}
+
+
+/* =========================================================
+   ANIMASI KARAKTER
+   ========================================================= */
+
+@keyframes characterAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+}
+
+
+/* bunga bergerak menuju kamera */
+
+@keyframes flowerGive {
+
+    0% {
+        transform:
+            translateX(-50%)
+            scale(0);
+    }
+
+    25% {
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+
+    60% {
+        transform:
+            translateX(-50%)
+            translateY(-10px)
+            scale(1.1);
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            translateY(-30px)
+            scale(1.35);
+    }
+}
+
+
+/* cincin bergerak menuju kamera */
+
+@keyframes ringGive {
+
+    0% {
+        transform:
+            translateX(-50%)
+            scale(0);
+    }
+
+    25% {
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+
+    70% {
+        transform:
+            translateX(-50%)
+            translateY(-15px)
+            scale(1.15);
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            translateY(-45px)
+            scale(1.35);
+    }
+}
+
+
+/* =========================================================
+   PARTIKEL
+   ========================================================= */
+
+.particle {
+
+    position: fixed;
+
+    pointer-events: none;
+
+    font-size: 18px;
+
+    animation:
+        fall 4s linear forwards;
+
+    z-index: 100;
+}
+
+
+@keyframes fall {
+
+    from {
+        transform:
+            translateY(-30px)
+            rotate(0);
+        opacity: 1;
+    }
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:600px) {
+
+    .card {
+        min-height: 380px;
+        padding: 40px 20px;
+    }
+
+    .question {
+        font-size: 25px;
+    }
+
+    .answer-area {
+        height: 260px;
+    }
+
+    #answer1 {
+        left: 15%;
+        top: 80px;
+    }
+
+    #answer2 {
+        left: 55%;
+        top: 80px;
+    }
+
+    .cartoon-scene {
+        height: 300px;
+    }
+}
+
+/* =========================================================
+   ANIMASI PRIA MEMBERIKAN BUNGA & CINCIN
+   ========================================================= */
+
+.proposal-scene {
+    position: relative;
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    border-radius: 25px;
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            #fffdf8 0%,
+            #f8e9e5 45%,
+            #ead4d2 100%
+        );
+}
+
+
+/* CAHAYA BULAN */
+
+.moonlight {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+
+    top: 25px;
+    right: 12%;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.75);
+
+    box-shadow:
+        0 0 50px rgba(255,255,255,0.7);
+
+    opacity: 0.8;
+}
+
+
+/* CAHAYA DI BELAKANG PRIA */
+
+.spotlight {
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    left: 50%;
+    top: 25px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.9) 0%,
+            rgba(255,220,220,0.3) 45%,
+            transparent 72%
+        );
+
+    filter: blur(8px);
+}
+
+
+/* LANTAI */
+
+.ground {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 75px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ead3c8,
+            #dcbeb8
+        );
+
+    border-radius: 50% 50% 0 0;
+}
+
+
+/* =========================================================
+   PRIA
+   ========================================================= */
+
+.man {
+    position: absolute;
+
+    width: 150px;
+    height: 260px;
+
+    left: 50%;
+    bottom: 48px;
+
+    transform:
+        translateX(-50%)
+        translateY(70px);
+
+    opacity: 0;
+
+    animation:
+        manAppear 1.5s ease forwards;
+}
+
+
+/* KEPALA */
+
+.man-head {
+    position: absolute;
+
+    width: 75px;
+    height: 82px;
+
+    left: 38px;
+    top: 5px;
+
+    background: #f2c5a7;
+
+    border-radius: 50%;
+
+    z-index: 5;
+}
+
+
+/* RAMBUT */
+
+.man-head .hair {
+    position: absolute;
+
+    width: 82px;
+    height: 48px;
+
+    left: -3px;
+    top: -5px;
+
+    background: #403031;
+
+    border-radius:
+        50% 50% 35% 35%;
+
+    z-index: 6;
+}
+
+
+/* MATA */
+
+.man-head .eye {
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    top: 39px;
+
+    background: #403031;
+
+    border-radius: 50%;
+
+    z-index: 7;
+}
+
+.eye-left {
+    left: 21px;
+}
+
+.eye-right {
+    right: 21px;
+}
+
+
+/* SENYUM */
+
+.smile {
+    position: absolute;
+
+    width: 22px;
+    height: 10px;
+
+    left: 50%;
+    top: 54px;
+
+    transform: translateX(-50%);
+
+    border-bottom:
+        3px solid #9d5d61;
+
+    border-radius: 0 0 50% 50%;
+
+    z-index: 7;
+}
+
+
+/* BADAN */
+
+.man-body {
+    position: absolute;
+
+    width: 82px;
+    height: 105px;
+
+    left: 34px;
+    top: 75px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #3e506d,
+            #526782,
+            #3e506d
+        );
+
+    border-radius:
+        35px 35px 18px 18px;
+
+    z-index: 3;
+}
+
+
+/* =========================================================
+   KAKI - POSISI BERLUTUT
+   ========================================================= */
+
+.leg {
+    position: absolute;
+
+    width: 24px;
+    height: 90px;
+
+    top: 160px;
+
+    background: #35445d;
+
+    border-radius: 15px;
+
+    transform-origin: top center;
+
+    z-index: 2;
+}
+
+
+/* KAKI KIRI */
+
+.leg-left {
+    left: 47px;
+
+    transform:
+        rotate(72deg)
+        translateY(10px);
+}
+
+
+/* KAKI KANAN */
+
+.leg-right {
+    left: 78px;
+
+    transform:
+        rotate(-72deg)
+        translateY(10px);
+}
+
+
+/* =========================================================
+   TANGAN
+   ========================================================= */
+
+.arm {
+    position: absolute;
+
+    width: 18px;
+    height: 80px;
+
+    top: 83px;
+
+    background: #f2c5a7;
+
+    border-radius: 20px;
+
+    transform-origin: top center;
+
+    z-index: 4;
+}
+
+
+/* TANGAN KIRI */
+
+.arm-left {
+    left: 25px;
+
+    transform:
+        rotate(35deg);
+
+    animation:
+        armFlower 2s ease
+        2.5s forwards;
+}
+
+
+/* TANGAN KANAN */
+
+.arm-right {
+    right: 25px;
+
+    transform:
+        rotate(-35deg);
+
+    animation:
+        armRing 2s ease
+        6s forwards;
+}
+
+
+/* =========================================================
+   BUKET BUNGA
+   ========================================================= */
+
+.bouquet {
+    position: absolute;
+
+    left: 50%;
+    top: 145px;
+
+    width: 95px;
+    height: 95px;
+
+    transform:
+        translateX(-50%)
+        scale(0.2);
+
+    opacity: 0;
+
+    z-index: 20;
+
+    animation:
+        bouquetForward
+        3s ease
+        2.5s forwards;
+}
+
+
+/* BUNGANYA */
+
+.flower {
+    position: absolute;
+
+    font-size: 38px;
+
+    transform:
+        scale(0.8);
+
+    filter:
+        drop-shadow(
+            0 5px 5px
+            rgba(80,40,40,0.15)
+        );
+}
+
+.f1 {
+    left: 5px;
+    top: 15px;
+}
+
+.f2 {
+    left: 30px;
+    top: 0;
+}
+
+.f3 {
+    right: 0;
+    top: 18px;
+}
+
+.f4 {
+    left: 28px;
+    top: 30px;
+}
+
+
+/* PEMBUNGKUS BUKET */
+
+.bouquet-wrap {
+    position: absolute;
+
+    width: 55px;
+    height: 45px;
+
+    left: 20px;
+    bottom: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f2d7d2,
+            #d8a6a8
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            75% 100%,
+            25% 100%
+        );
+
+    border-radius: 5px;
+}
+
+
+/* =========================================================
+   KOTAK CINCIN
+   ========================================================= */
+
+.ring-box {
+    position: absolute;
+
+    left: 50%;
+    top: 175px;
+
+    width: 65px;
+    height: 50px;
+
+    transform:
+        translateX(-50%)
+        scale(0);
+
+    opacity: 0;
+
+    z-index: 30;
+
+    animation:
+        ringForward
+        3s ease
+        6s forwards;
+}
+
+
+/* BAGIAN BAWAH KOTAK */
+
+.ring-box::before {
+    content: "";
+
+    position: absolute;
+
+    width: 65px;
+    height: 35px;
+
+    bottom: 0;
+    left: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6b4b50,
+            #9a6c70
+        );
+
+    border-radius: 5px;
+}
+
+
+/* TUTUP KOTAK */
+
+.ring-top {
+    position: absolute;
+
+    width: 65px;
+    height: 25px;
+
+    left: 0;
+    top: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c49a9e,
+            #8e6066
+        );
+
+    border-radius: 5px;
+
+    transform-origin:
+        bottom center;
+
+    z-index: 2;
+
+    animation:
+        boxOpen
+        1s ease
+        7.5s forwards;
+}
+
+
+/* CINCIN */
+
+.ring {
+    position: absolute;
+
+    left: 50%;
+    bottom: 8px;
+
+    transform:
+        translateX(-50%)
+        scale(0);
+
+    font-size: 25px;
+
+    z-index: 5;
+
+    animation:
+        ringAppear
+        1s ease
+        7.8s forwards;
+}
+
+
+/* =========================================================
+   TEKS
+   ========================================================= */
+
+.proposal-text {
+    position: absolute;
+
+    left: 50%;
+    bottom: 18px;
+
+    transform:
+        translateX(-50%);
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family: Georgia, serif;
+
+    font-size: 18px;
+
+    color: #765b5e;
+
+    opacity: 0;
+
+    z-index: 50;
+
+    animation:
+        textAppear
+        2s ease
+        8.5s forwards;
+}
+
+.proposal-text span {
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   ANIMASI
+   ========================================================= */
+
+@keyframes manAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(100px)
+            scale(0.8);
+    }
+
+    60% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* TANGAN BUNGA */
+
+@keyframes armFlower {
+
+    0% {
+        transform:
+            rotate(35deg);
+    }
+
+    100% {
+        transform:
+            rotate(-55deg)
+            translateY(-12px);
+    }
+}
+
+
+/* TANGAN CINCIN */
+
+@keyframes armRing {
+
+    0% {
+        transform:
+            rotate(-35deg);
+    }
+
+    100% {
+        transform:
+            rotate(55deg)
+            translateY(-10px);
+    }
+}
+
+
+/* BUKET MAJU KE DEPAN */
+
+@keyframes bouquetForward {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(20px)
+            scale(0.2);
+    }
+
+    25% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(0.8);
+    }
+
+    65% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(-15px)
+            scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(-25px)
+            scale(1.35);
+    }
+}
+
+
+/* KOTAK CINCIN MAJU */
+
+@keyframes ringForward {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(10px)
+            scale(0);
+    }
+
+    30% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(0.8);
+    }
+
+    70% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(-20px)
+            scale(1.15);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(-35px)
+            scale(1.35);
+    }
+}
+
+
+/* KOTAK TERBUKA */
+
+@keyframes boxOpen {
+
+    0% {
+        transform:
+            rotateX(0);
+    }
+
+    100% {
+        transform:
+            rotateX(-120deg);
+    }
+}
+
+
+/* CINCIN MUNCUL */
+
+@keyframes ringAppear {
+
+    0% {
+        transform:
+            translateX(-50%)
+            scale(0);
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+}
+
+
+/* TEKS MUNCUL */
+
+@keyframes textAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(15px);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+}</style>
+</head>
+
+
+<body>
+
+
+<!-- CAHAYA -->
+
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+
+<!-- =====================================================
+     HALAMAN PEMBUKA
+====================================================== -->
+
+<section
+    id="welcome"
+    class="screen">
+
+    <div class="card">
+
+        <div class="small-title">
+            A Little Surprise
+        </div>
+
+        <h1>
+            Untuk ica, yang cantik.
+        </h1>
+
+        <p class="intro">
+            Ada beberapa pertanyaan kecil
+            yang ingin abi tanyakan.
+            Jawablah dengan jujur...
+        </p>
+
+        <button
+            class="start-btn"
+            onclick="startGame()">
+
+            Mulai
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HALAMAN PERTANYAAN
+====================================================== -->
+
+<section
+    id="quiz"
+    class="screen hidden">
+
+    <div class="question-card">
+
+        <div
+            class="question-number"
+            id="questionNumber">
+
+            PERTANYAAN 01
+
+        </div>
+
+        <div
+            class="question"
+            id="question">
+
+            Pertanyaan
+
+        </div>
+
+
+        <div
+            class="answer-area"
+            id="answerArea">
+
+            <button
+                class="answer-btn"
+                id="answer1"
+                onclick="chooseAnswer(0)">
+
+                Ya
+
+            </button>
+
+
+            <button
+                class="answer-btn"
+                id="answer2"
+                onclick="chooseAnswer(1)">
+
+                Tidak
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HALAMAN AKHIR
+====================================================== -->
+
+<section
+    id="final"
+    class="screen hidden">
+
+    <div class="final-card">
+
+        <div class="small-title">
+            For You
+        </div>
+
+        <div class="final-title">
+            Terima kasih ❤️
+        </div>
+
+        <div class="final-subtitle">
+            Ada sesuatu untukmu...
+        </div>
+
+
+<!-- =================================================
+     ANIMASI PRIA MEMBERIKAN BUNGA & CINCIN
+================================================== -->
+
+<div class="proposal-scene">
+
+    <!-- CAHAYA BULAN -->
+    <div class="moonlight"></div>
+
+    <!-- CAHAYA DI BELAKANG -->
+    <div class="spotlight"></div>
+
+    <!-- LANTAI -->
+    <div class="ground"></div>
+
+
+    <!-- =================================================
+         KARAKTER PRIA
+    ================================================== -->
+
+    <div class="man">
+
+        <!-- KEPALA -->
+        <div class="man-head">
+
+            <div class="hair"></div>
+
+            <div class="eye eye-left"></div>
+            <div class="eye eye-right"></div>
+
+            <div class="smile"></div>
+
+        </div>
+
+
+        <!-- BADAN -->
+        <div class="man-body"></div>
+
+
+        <!-- KAKI BERLUTUT -->
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+
+
+        <!-- TANGAN -->
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+
+
+        <!-- =================================================
+             BUKET BUNGA
+        ================================================== -->
+
+        <div class="bouquet">
+
+            <div class="flower f1">🌹</div>
+            <div class="flower f2">🌷</div>
+            <div class="flower f3">🌹</div>
+            <div class="flower f4">🌸</div>
+
+            <div class="bouquet-wrap"></div>
+
+        </div>
+
+
+        <!-- =================================================
+             KOTAK CINCIN
+        ================================================== -->
+
+        <div class="ring-box">
+
+            <div class="ring-top"></div>
+
+            <div class="ring">
+                💍
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TEKS -->
+    <div class="proposal-text">
+
+        <span>Untukmu...</span>
+
+    </div>
+
+</div><!-- =================================================
+             FOTO
+        ================================================== -->
+
+        <img
+            id="finalPhoto"
+            class="photo"
+            src="foto ica.jpeg"
+            alt="Foto">
+
+
+        <!-- =================================================
+             VIDEO
+        ================================================== -->
+
+        <video
+            id="finalVideo"
+            class="video"
+            controls
+            playsinline>
+
+            <source
+                src="WhatsApp Video 2026-10-07 at 23.47.19.mp4"
+                type="video/mp4">
+
+        </video>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MUSIK
+====================================================== -->
+
+<audio
+    id="music"
+    loop>
+
+    <source
+        src="sempurna-andra-and-the-backbone_B0x4SxxB.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+
+<script>
+
+/* =========================================================
+   DATA PERTANYAAN
+   =========================================================
+
+   GANTI BAGIAN INI DENGAN PERTANYAAN KAMU.
+
+   HANYA ADA 2 JAWABAN.
+
+   correct = jawaban yang kamu inginkan.
+
+========================================================= */
+
+
+const questions = [
+
+    {
+        question:
+            "Apakah kamu sayang habibi?",
+
+        answers: [
+            "Tidak",
+            "Iya"
+        ],
+
+        correct:
+            "Tidak"
+    },
+
+
+    {
+        question:
+            "Apakah kamu suka habibi?",
+
+        answers: [
+            "Tidak",
+            "Iya"
+        ],
+
+        correct:
+            "Tidak"
+    },
+
+
+    {
+        question:
+            "tekan iya jika kamu ingin membunuh habibi?",
+
+        answers: [
+            "iya",
+            "tidak"
+        ],
+
+        correct:
+            "iya"
+    }
+
+];
+
+
+
+/* =========================================================
+   VARIABEL
+========================================================= */
+
+let currentQuestion = 0;
+
+
+/* =========================================================
+   MULAI
+========================================================= */
+
+function startGame() {
+
+    document
+        .getElementById("welcome")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("quiz")
+        .classList
+        .remove("hidden");
+
+
+    currentQuestion = 0;
+
+
+    showQuestion();
+
+
+    /*
+       Musik mulai setelah pengguna
+       melakukan interaksi.
+    */
+
+    document
+        .getElementById("music")
+        .play()
+        .catch(() => {});
+
+}
+
+
+
+/* =========================================================
+   TAMPILKAN PERTANYAAN
+========================================================= */
+
+function showQuestion() {
+
+    const q =
+        questions[currentQuestion];
+
+
+    document
+        .getElementById("question")
+        .textContent =
+        q.question;
+
+
+    document
+        .getElementById("questionNumber")
+        .textContent =
+
+        "PERTANYAAN " +
+
+        String(
+            currentQuestion + 1
+        ).padStart(2, "0");
+
+
+    /*
+       Reset posisi tombol
+    */
+
+    const button1 =
+        document
+        .getElementById("answer1");
+
+
+    const button2 =
+        document
+        .getElementById("answer2");
+
+
+    button1.textContent =
+        q.answers[0];
+
+
+    button2.textContent =
+        q.answers[1];
+
+
+    button1.style.left =
+        "30%";
+
+
+    button1.style.top =
+        "70px";
+
+
+    button2.style.left =
+        "55%";
+
+
+    button2.style.top =
+        "70px";
+
+}
+
+
+
+/* =========================================================
+   PILIH JAWABAN
+========================================================= */
+
+function chooseAnswer(index) {
+
+    const q =
+        questions[currentQuestion];
+
+
+    const selected =
+        q.answers[index];
+
+
+    /*
+       JAWABAN BENAR
+    */
+
+    if (
+        selected === q.correct
+    ) {
+
+        currentQuestion++;
+
+
+        /*
+           Jika masih ada pertanyaan
+        */
+
+        if (
+            currentQuestion <
+            questions.length
+        ) {
+
+            showQuestion();
+
+        }
+
+        /*
+           Jika selesai
+        */
+
+        else {
+
+            showFinal();
+
+        }
+
+    }
+
+
+    /*
+       JAWABAN SALAH
+    */
+
+    else {
+
+        moveButton(index);
+
+    }
+
+}
+
+
+
+/* =========================================================
+   PINDAHKAN TOMBOL
+========================================================= */
+
+function moveButton(index) {
+
+    const button =
+        index === 0
+
+        ?
+
+        document.getElementById(
+            "answer1"
+        )
+
+        :
+
+        document.getElementById(
+            "answer2"
+        );
+
+
+    /*
+       Area aman supaya tombol
+       tetap berada di layar.
+    */
+
+    const maxX =
+        window.innerWidth - 120;
+
+
+    const maxY =
+        window.innerHeight - 100;
+
+
+    const randomX =
+        Math.max(
+            20,
+            Math.random() * maxX
+        );
+
+
+    const randomY =
+        Math.max(
+            80,
+            Math.random() * maxY
+        );
+
+
+    button.style.position =
+        "fixed";
+
+
+    button.style.left =
+        randomX + "px";
+
+
+    button.style.top =
+        randomY + "px";
+
+
+    /*
+       Sedikit efek
+    */
+
+    button.style.transform =
+        "scale(1.05)";
+
+
+    setTimeout(() => {
+
+        button.style.transform =
+            "scale(1)";
+
+    }, 300);
+
+}
+
+
+
+/* =========================================================
+   HALAMAN AKHIR
+========================================================= */
+
+function showFinal() {
+
+    document
+        .getElementById("quiz")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("final")
+        .classList
+        .remove("hidden");
+
+
+    /*
+       Jalankan animasi
+    */
+
+    createParticles();
+
+
+    /*
+       Mainkan musik
+    */
+
+    document
+        .getElementById("music")
+        .play()
+        .catch(() => {});
+
+}
+
+
+
+/* =========================================================
+   PARTIKEL
+========================================================= */
+
+function createParticles() {
+
+    const symbols = [
+        "✨",
+        "🌸",
+        "💗",
+        "🤍",
+        "⭐"
+    ];
+
+
+    for (
+        let i = 0;
+        i < 50;
+        i++
+    ) {
+
+        const particle =
+            document
+            .createElement("div");
+
+
+        particle.className =
+            "particle";
+
+
+        particle.textContent =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+
+        particle.style.left =
+            Math.random() * 100 +
+            "vw";
+
+
+        particle.style.animationDelay =
+            Math.random() * 2 +
+            "s";
+
+
+        document.body
+            .appendChild(
+                particle
+            );
+
+
+        setTimeout(() => {
+
+            particle.remove();
+
+        }, 5000);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
